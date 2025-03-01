@@ -1,33 +1,31 @@
 import Link from "next/link";
-import { ThemeToggle } from "../molecules/theme-toggle";
 import { Typography } from "../ui/typography";
 import { Github } from "lucide-react";
+import { ModeToggle } from "../ui/mode-toggle";
 
 interface NavbarProps {}
 
 export function Navbar(props: NavbarProps) {
+  const items = ["Notes", "Projects", "Blog", "Work with me", "Contact"];
   return (
-    <div className="flex justify-between pt-5">
-      <Typography className="text-primary-foreground-" variant="h1">
+    <div className="flex justify-between pt-5 sticky z-50 opacity-70">
+      <Typography className=" my-auto" variant="h1">
         TL
       </Typography>
-			<div className="">
-				<ul className="flex space-x-2 ">
-					<li className="cursor-pointer text-sm">Notes</li>
-					<li className="cursor-pointer text-sm">Work with me</li>
-					<li className="cursor-pointer text-sm">Projects</li>
-					<li className="cursor-pointer text-sm">
-						Blog
-					</li>
-					<li>Contact me</li>
-				</ul>
-			</div>
-      <div className="flex space-x-2">
+      <div className=" my-auto">
+        <ul className="flex space-x-8 ">
+          {items.map((c) => (
+            <li className="cursor-pointer text-sm hover:text-blue-300" key={c}>
+              {c}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex space-x-4">
         <Link target="_blanck" href="https://github.com/GaelTikeng">
-          <Github size={20} className="cursor-pointer" />
+          <Github size={20} className="cursor-pointer my-auto " />
         </Link>
-
-        <ThemeToggle />
+        <ModeToggle />
       </div>
     </div>
   );
