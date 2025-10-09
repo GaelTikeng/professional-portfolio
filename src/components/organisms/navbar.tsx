@@ -28,11 +28,7 @@ export function Navbar(props: NavbarProps) {
               </div>
               <div className="absolute -inset-1 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition-opacity duration-300"></div>
             </div>
-            <div className="hidden sm:block">
-              <Typography className="font-semibold text-foreground" variant="h4">
-                Tikeng Lambou
-              </Typography>
-            </div>
+           
           </Link>
 
           {/* Navigation Links */}

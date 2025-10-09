@@ -106,23 +106,7 @@ export default function ProfilePage() {
                   </div>
                 </Link>
 
-                <Link
-                  href="https://github.com/gmarvis"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-800 to-gray-900 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-700/20 to-gray-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                      <Github className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">GitHub</div>
-                      <div className="text-sm opacity-90">Code Repository</div>
-                    </div>
-                  </div>
-                </Link>
+                
 
                 <Link
                   href="https://wa.me/+237672028854"
@@ -154,6 +138,24 @@ export default function ProfilePage() {
                     <div>
                       <div className="font-semibold">Email</div>
                       <div className="text-sm opacity-90">Direct Contact</div>
+                    </div>
+                  </div>
+                </Link>
+
+								<Link
+                  href="https://github.com/gaeltikeng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-800 to-gray-900 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-700/20 to-gray-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative flex items-center gap-4">
+                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+                      <Github className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="font-semibold">GitHub</div>
+                      <div className="text-sm opacity-90">Code Repository</div>
                     </div>
                   </div>
                 </Link>
