@@ -1,15 +1,112 @@
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Linkedin, MessageCircle, Github, Mail, ArrowLeft, MapPin, Calendar, Briefcase, Code, Star } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+"use client";
+
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Linkedin,
+  MessageCircle,
+  Github,
+  Mail,
+  ArrowLeft,
+  MapPin,
+	Briefcase,
+  Code,
+  Star,
+  Download,
+  UserPlus,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function ProfilePage() {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  // Contact information
+  const contactInfo = {
+    name: "Tikeng Gael",
+    title: "Software Engineer & Entrepreneur",
+    phone: "+237672028854",
+    email: "tikenglambougaelinho@gmail.com",
+    website: typeof window !== "undefined" ? window.location.origin : "",
+    linkedin: "https://linkedin.com/in/gaeltikeng",
+    github: "https://github.com/gaeltikeng",
+    organization: "Tech Entrepreneur",
+    address: "Cameroon",
+  };
+
+  // Generate vCard content
+  const generateVCard = () => {
+    const vCard = `BEGIN:VCARD
+		VERSION:3.0
+		FN:${contactInfo.name}
+		N:Gael;Tikeng;;;
+		ORG:${contactInfo.organization}
+		TITLE:${contactInfo.title}
+		TEL;TYPE=CELL:${contactInfo.phone}
+		EMAIL:${contactInfo.email}
+		URL:${contactInfo.website}
+		URL;TYPE=LinkedIn:${contactInfo.linkedin}
+		URL;TYPE=GitHub:${contactInfo.github}
+		ADR;TYPE=HOME:;;${contactInfo.address};;;;
+		NOTE:Passionate entrepreneur & startup founder with expertise in fullstack development. Building innovative solutions that make a difference.
+		END:VCARD`;
+    return vCard;
+  };
+
+  // Save contact function
+  const saveContact = async () => {
+    setIsDownloading(true);
+
+    try {
+      const vCardContent = generateVCard();
+
+      // Check if Web Share API is supported and device can handle vCard
+      if (navigator.share && navigator.canShare) {
+        try {
+          const file = new File(
+            [vCardContent],
+            `${contactInfo.name.replace(" ", "_")}.vcf`,
+            {
+              type: "text/vcard",
+            }
+          );
+
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: `Save ${contactInfo.name}'s Contact`,
+              text: `Save ${contactInfo.name}'s contact information to your phone`,
+              files: [file],
+            });
+            return;
+          }
+        } catch (shareError) {
+          console.log("Web Share failed, falling back to download");
+        }
+      }
+
+      // Fallback: Create download link
+      const blob = new Blob([vCardContent], { type: "text/vcard" });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${contactInfo.name.replace(" ", "_")}.vcf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error saving contact:", error);
+      alert("Sorry, there was an error saving the contact. Please try again.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Navigation back */}
       <div className="fixed top-6 left-6 z-10">
-        <Link 
+        <Link
           href="/"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-muted-foreground hover:text-foreground hover:border-border transition-all duration-200 text-sm shadow-lg hover:shadow-xl"
         >
@@ -26,7 +123,7 @@ export default function ProfilePage() {
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5"></div>
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-full blur-3xl -translate-y-32 translate-x-32"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl translate-y-24 -translate-x-24"></div>
-            
+
             <div className="relative z-10 p-8 md:p-12">
               {/* Profile Header */}
               <div className="text-center space-y-6 mb-8">
@@ -69,7 +166,9 @@ export default function ProfilePage() {
                 <div className="text-center p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50">
                   <Star className="w-6 h-6 mx-auto mb-2 text-yellow-500" />
                   <div className="text-sm font-medium">Projects</div>
-                  <div className="text-xs text-muted-foreground">10+ completed</div>
+                  <div className="text-xs text-muted-foreground">
+                    10+ completed
+                  </div>
                 </div>
                 <div className="col-span-2 md:col-span-1 text-center p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50">
                   <MapPin className="w-6 h-6 mx-auto mb-2 text-green-500" />
@@ -81,12 +180,13 @@ export default function ProfilePage() {
               {/* Bio */}
               <div className="text-center mb-8">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
-                  Passionate entrepreneur & startup founder with expertise in fullstack development. 
-                  Building innovative solutions that make a difference.
+                  Passionate entrepreneur & startup founder with expertise in
+                  fullstack development. Building innovative solutions that make
+                  a difference.
                 </p>
               </div>
 
-              {/* Social Media Buttons */}
+              {/* Social Media & Contact Buttons */}
               <div className="grid gap-4 md:grid-cols-2">
                 <Link
                   href="https://linkedin.com/in/gaeltikeng"
@@ -101,12 +201,12 @@ export default function ProfilePage() {
                     </div>
                     <div>
                       <div className="font-semibold">LinkedIn</div>
-                      <div className="text-sm opacity-90">Professional Network</div>
+                      <div className="text-sm opacity-90">
+                        Professional Network
+                      </div>
                     </div>
                   </div>
                 </Link>
-
-                
 
                 <Link
                   href="https://wa.me/+237672028854"
@@ -142,7 +242,7 @@ export default function ProfilePage() {
                   </div>
                 </Link>
 
-								<Link
+                <Link
                   href="https://github.com/gaeltikeng"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -159,6 +259,37 @@ export default function ProfilePage() {
                     </div>
                   </div>
                 </Link>
+
+                {/* Enhanced Save Contact Button */}
+                <button
+                  onClick={saveContact}
+                  disabled={isDownloading}
+                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed disabled:hover:scale-100 col-span-2"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative flex items-center justify-center gap-4">
+                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+                      {isDownloading ? (
+                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
+                        <UserPlus className="w-6 h-6" />
+                      )}
+                    </div>
+                    <div className="text-center md:text-left">
+                      <div className="font-semibold text-lg">
+                        {isDownloading ? "Saving Contact..." : "Save Contact"}
+                      </div>
+                      <div className="text-sm opacity-90">
+                        Add to your phone contacts
+                      </div>
+                    </div>
+                    {!isDownloading && (
+                      <div className="hidden md:block p-2 rounded-lg bg-white/10">
+                        <Download className="w-4 h-4 opacity-75" />
+                      </div>
+                    )}
+                  </div>
+                </button>
               </div>
 
               {/* Call to Action */}
@@ -176,5 +307,5 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
