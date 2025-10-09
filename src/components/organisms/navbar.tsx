@@ -1,17 +1,29 @@
+'use client';
 import Link from "next/link";
 import { Typography } from "../ui/typography";
-import { Github } from "lucide-react";
+import { Github, Menu, X } from "lucide-react";
 import { ModeToggle } from "../ui/mode-toggle";
+import { useState } from "react";
 
 interface NavbarProps {}
 
 export function Navbar(props: NavbarProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   const navItems = [
     { name: "Profile", href: "/profile" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
     { name: "Connect", href: "/connect" },
   ];
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
   
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -45,7 +57,42 @@ export function Navbar(props: NavbarProps) {
           </div>
 
           {/* Right side actions */}
-          <ModeToggle />
+          <div className="flex items-center space-x-3">
+            <ModeToggle />
+            
+            {/* Mobile menu button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors duration-200"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <X size={20} />
+              ) : (
+                <Menu size={20} />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen 
+            ? 'max-h-64 opacity-100 border-t border-border/40' 
+            : 'max-h-0 opacity-0 overflow-hidden'
+        }`}>
+          <div className="px-4 py-4 space-y-2 bg-background/95 backdrop-blur">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={closeMobileMenu}
+                className="block px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </nav>
