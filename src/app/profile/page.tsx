@@ -8,7 +8,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Navigation back */}
-      {/* <div className="fixed top-6 left-6 z-10">
+      <div className="fixed top-6 left-6 z-10">
         <Link 
           href="/"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-muted-foreground hover:text-foreground hover:border-border transition-all duration-200 text-sm shadow-lg hover:shadow-xl"
@@ -16,7 +16,7 @@ export default function ProfilePage() {
           <ArrowLeft className="h-4 w-4" />
           Back to Portfolio
         </Link>
-      </div> */}
+      </div>
 
       <div className="flex items-center justify-center min-h-screen p-4 pt-20">
         <div className="w-full max-w-2xl">
@@ -162,7 +162,7 @@ export default function ProfilePage() {
               </div>
 
               {/* Call to Action */}
-              {/* <div className="mt-8 text-center">
+              <div className="mt-8 text-center">
                 <Link
                   href="/"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
@@ -170,7 +170,7 @@ export default function ProfilePage() {
                   <span>Explore My Portfolio</span>
                   <ArrowLeft className="w-4 h-4 rotate-180" />
                 </Link>
-              </div> */}
+              </div>
             </div>
           </Card>
         </div>

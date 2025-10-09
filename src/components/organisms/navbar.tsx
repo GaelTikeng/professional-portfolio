@@ -10,7 +10,6 @@ export function Navbar(props: NavbarProps) {
     { name: "Profile", href: "/profile" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
-    { name: "Work with me", href: "/work-with-me" },
     { name: "Connect", href: "/connect" },
   ];
   
@@ -46,16 +45,7 @@ export function Navbar(props: NavbarProps) {
           </div>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-3">
-            <Link 
-              target="_blank" 
-              href="https://github.com/GaelTikeng"
-              className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all duration-200 group"
-            >
-              <Github size={20} className="group-hover:scale-110 transition-transform duration-200" />
-            </Link>
-            <ModeToggle />
-          </div>
+          <ModeToggle />
         </div>
       </div>
     </nav>
