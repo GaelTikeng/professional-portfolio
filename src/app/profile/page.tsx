@@ -187,21 +187,21 @@ export default function ProfilePage() {
               </div>
 
               {/* Social Media & Contact Buttons */}
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
                 <Link
                   href="https://linkedin.com/in/gaeltikeng"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 p-4 sm:p-6 text-white transition-all duration-300 active:scale-95 sm:hover:scale-105 hover:shadow-xl min-h-[80px] sm:min-h-auto"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                      <Linkedin className="w-6 h-6" />
+                  <div className="relative flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm flex-shrink-0">
+                      <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <div>
-                      <div className="font-semibold">LinkedIn</div>
-                      <div className="text-sm opacity-90">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-base sm:text-lg truncate">LinkedIn</div>
+                      <div className="text-xs sm:text-sm opacity-90 truncate">
                         Professional Network
                       </div>
                     </div>
@@ -212,32 +212,32 @@ export default function ProfilePage() {
                   href="https://wa.me/+237672028854"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-green-600 to-green-700 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-green-600 to-green-700 p-4 sm:p-6 text-white transition-all duration-300 active:scale-95 sm:hover:scale-105 hover:shadow-xl min-h-[80px] sm:min-h-auto"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                      <MessageCircle className="w-6 h-6" />
+                  <div className="relative flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm flex-shrink-0">
+                      <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <div>
-                      <div className="font-semibold">WhatsApp</div>
-                      <div className="text-sm opacity-90">Quick Message</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-base sm:text-lg truncate">WhatsApp</div>
+                      <div className="text-xs sm:text-sm opacity-90 truncate">Quick Message</div>
                     </div>
                   </div>
                 </Link>
 
                 <Link
                   href="mailto:tikenglambougaelinho@gmail.com"
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 p-4 sm:p-6 text-white transition-all duration-300 active:scale-95 sm:hover:scale-105 hover:shadow-xl min-h-[80px] sm:min-h-auto"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                      <Mail className="w-6 h-6" />
+                  <div className="relative flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm flex-shrink-0">
+                      <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <div>
-                      <div className="font-semibold">Email</div>
-                      <div className="text-sm opacity-90">Direct Contact</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-base sm:text-lg truncate">Email</div>
+                      <div className="text-xs sm:text-sm opacity-90 truncate">Direct Contact</div>
                     </div>
                   </div>
                 </Link>
@@ -246,16 +246,16 @@ export default function ProfilePage() {
                   href="https://github.com/gaeltikeng"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-800 to-gray-900 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-gray-800 to-gray-900 p-4 sm:p-6 text-white transition-all duration-300 active:scale-95 sm:hover:scale-105 hover:shadow-xl min-h-[80px] sm:min-h-auto"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-700/20 to-gray-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                      <Github className="w-6 h-6" />
+                  <div className="relative flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm flex-shrink-0">
+                      <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <div>
-                      <div className="font-semibold">GitHub</div>
-                      <div className="text-sm opacity-90">Code Repository</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-base sm:text-lg truncate">GitHub</div>
+                      <div className="text-xs sm:text-sm opacity-90 truncate">Code Repository</div>
                     </div>
                   </div>
                 </Link>
@@ -264,27 +264,27 @@ export default function ProfilePage() {
                 <button
                   onClick={saveContact}
                   disabled={isDownloading}
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-6 text-white transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed disabled:hover:scale-100 col-span-2"
+                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-4 sm:p-6 text-white transition-all duration-300 active:scale-95 sm:hover:scale-105 hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed disabled:active:scale-100 disabled:sm:hover:scale-100 col-span-1 sm:col-span-2 min-h-[80px] sm:min-h-auto"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative flex items-center justify-center gap-4">
-                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+                  <div className="relative flex items-center justify-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm flex-shrink-0">
                       {isDownloading ? (
-                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                       ) : (
-                        <UserPlus className="w-6 h-6" />
+                        <UserPlus className="w-5 h-5 sm:w-6 sm:h-6" />
                       )}
                     </div>
-                    <div className="text-center md:text-left">
-                      <div className="font-semibold text-lg">
+                    <div className="text-center sm:text-left flex-1 min-w-0">
+                      <div className="font-semibold text-base sm:text-lg truncate">
                         {isDownloading ? "Saving Contact..." : "Save Contact"}
                       </div>
-                      <div className="text-sm opacity-90">
+                      <div className="text-xs sm:text-sm opacity-90 truncate">
                         Add to your phone contacts
                       </div>
                     </div>
                     {!isDownloading && (
-                      <div className="hidden md:block p-2 rounded-lg bg-white/10">
+                      <div className="hidden sm:block p-2 rounded-lg bg-white/10 flex-shrink-0">
                         <Download className="w-4 h-4 opacity-75" />
                       </div>
                     )}
