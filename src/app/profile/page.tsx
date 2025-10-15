@@ -31,51 +31,48 @@ export default function ProfilePage() {
     website: typeof window !== "undefined" ? window.location.origin : "",
     linkedin: "https://linkedin.com/in/gaeltikeng",
     github: "https://github.com/gaeltikeng",
-    organization: "Tech Entrepreneur",
-    address: "Cameroon",
+    organization: "Nyota ltd",
+    address: "Yaoundé, Cameroon",
   };
 
-  // Generate vCard content
+  // Generate vCard content - Android compatible format
   const generateVCard = () => {
     const vCard = `BEGIN:VCARD
-		VERSION:3.0
-		FN:${contactInfo.name}
-		N:Gael;Tikeng;;;
-		ORG:${contactInfo.organization}
-		TITLE:${contactInfo.title}
-		TEL;TYPE=CELL:${contactInfo.phone}
-		EMAIL:${contactInfo.email}
-		URL:${contactInfo.website}
-		URL;TYPE=LinkedIn:${contactInfo.linkedin}
-		URL;TYPE=GitHub:${contactInfo.github}
-		ADR;TYPE=HOME:;;${contactInfo.address};;;;
-		NOTE:Passionate entrepreneur & startup founder with expertise in fullstack development. Building innovative solutions that make a difference.
-		END:VCARD`;
+VERSION:3.0
+FN:${contactInfo.name}
+N:Tikeng;Gael;;;
+ORG:${contactInfo.organization}
+TITLE:${contactInfo.title}
+TEL;TYPE=CELL,VOICE:${contactInfo.phone}
+EMAIL;TYPE=INTERNET:${contactInfo.email}
+URL:${contactInfo.website}
+NOTE:Passionate entrepreneur & startup founder with expertise in fullstack development. Building innovative solutions that make a difference.
+END:VCARD`;
     return vCard;
   };
 
-  // Save contact function
+  // Save contact function - Enhanced Android compatibility
   const saveContact = async () => {
     setIsDownloading(true);
 
     try {
       const vCardContent = generateVCard();
+      const fileName = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`;
 
-      // Check if Web Share API is supported and device can handle vCard
-      if (navigator.share && navigator.canShare) {
+      // Detect if user is on Android
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      
+      // Try Web Share API first (works well on modern Android)
+      if (navigator.share && !isAndroid) {
         try {
-          const file = new File(
-            [vCardContent],
-            `${contactInfo.name.replace(" ", "_")}.vcf`,
-            {
-              type: "text/vcard",
-            }
-          );
+          const file = new File([vCardContent], fileName, {
+            type: "text/vcard",
+          });
 
-          if (navigator.canShare({ files: [file] })) {
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
               title: `Save ${contactInfo.name}'s Contact`,
-              text: `Save ${contactInfo.name}'s contact information to your phone`,
+              text: `Save ${contactInfo.name}'s contact information`,
               files: [file],
             });
             return;
@@ -85,19 +82,62 @@ export default function ProfilePage() {
         }
       }
 
-      // Fallback: Create download link
-      const blob = new Blob([vCardContent], { type: "text/vcard" });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${contactInfo.name.replace(" ", "_")}.vcf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // For Android or when Web Share fails, use direct download with proper MIME types
+      const mimeTypes = [
+        "text/vcard",
+        "text/x-vcard", 
+        "application/octet-stream"
+      ];
+      
+      let downloadSuccess = false;
+      
+      for (const mimeType of mimeTypes) {
+        try {
+          const blob = new Blob([vCardContent], { type: mimeType });
+          const url = window.URL.createObjectURL(blob);
+          
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = fileName;
+          link.style.display = "none";
+          
+          document.body.appendChild(link);
+          link.click();
+          
+          // Clean up
+          setTimeout(() => {
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+          }, 100);
+          
+          downloadSuccess = true;
+          break;
+        } catch (blobError) {
+          console.log(`Failed with MIME type ${mimeType}, trying next...`);
+        }
+      }
+      
+      if (!downloadSuccess) {
+        throw new Error("All download methods failed");
+      }
+      
     } catch (error) {
       console.error("Error saving contact:", error);
-      alert("Sorry, there was an error saving the contact. Please try again.");
+      
+      // Final fallback: Show vCard content for manual copy
+      const vCardContent = generateVCard();
+      const message = `Please copy this vCard data and save it as a .vcf file:\n\n${vCardContent}`;
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(vCardContent);
+          alert("vCard content copied to clipboard! You can paste it into a text file and save as .vcf");
+        } catch (clipboardError) {
+          alert(message);
+        }
+      } else {
+        alert(message);
+      }
     } finally {
       setIsDownloading(false);
     }
