@@ -28,7 +28,8 @@ export default function ProfilePage() {
     title: "Software Engineer & Entrepreneur",
     phone: "+237672028854",
     email: "tikenglambougaelinho@gmail.com",
-    website: typeof window !== "undefined" ? window.location.origin : "",
+    company_site: "https://nyota.work",
+    website: "https://gaeltikeng.site",
     linkedin: "https://linkedin.com/in/gaeltikeng",
     github: "https://github.com/gaeltikeng",
     organization: "Nyota ltd",
@@ -46,6 +47,7 @@ TITLE:${contactInfo.title}
 TEL;TYPE=CELL,VOICE:${contactInfo.phone}
 EMAIL;TYPE=INTERNET:${contactInfo.email}
 URL:${contactInfo.website}
+URL;TYPE=WORK:${contactInfo.company_site}
 NOTE:Passionate entrepreneur & startup founder with expertise in fullstack development. Building innovative solutions that make a difference.
 END:VCARD`;
     return vCard;
