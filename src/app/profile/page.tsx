@@ -25,7 +25,7 @@ export default function ProfilePage() {
   // Contact information
   const contactInfo = {
     name: "Tikeng Gael",
-    title: "Software Engineer & Entrepreneur",
+    title: "Software Engineer",
     phone: "+237672028854",
     email: "tikenglambougaelinho@gmail.com",
     company_site: "https://nyota.work",
